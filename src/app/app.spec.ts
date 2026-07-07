@@ -1,5 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { App } from './app';
+import { Header } from './components/header/header';
 
 describe('App', () => {
   beforeEach(async () => {
@@ -14,10 +15,9 @@ describe('App', () => {
     expect(app).toBeTruthy();
   });
 
-  it('should render title', async () => {
-    const fixture = TestBed.createComponent(App);
-    await fixture.whenStable();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, budget-albert');
+    it('should create the Header component', () => {
+    const fixture = TestBed.createComponent(Header);
+    const app = fixture.componentInstance;
+    expect(app).toBeTruthy();
   });
 });

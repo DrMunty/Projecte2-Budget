@@ -19,4 +19,16 @@ describe('Header', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should render title', async () => {
+    const fixture = TestBed.createComponent(Header);
+    fixture.detectChanges();
+    await fixture.whenStable();
+    const compiled = fixture.nativeElement as HTMLElement;
+    const h1Element = compiled.querySelector('h1');
+    expect(h1Element).toBeTruthy();
+    expect(h1Element?.textContent?.trim()).toContain('Aconsegueix la millor qualitat');
+  });
+
 });
+
