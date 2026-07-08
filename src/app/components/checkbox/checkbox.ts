@@ -1,4 +1,4 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, signal, output} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import type { Task } from './task';
@@ -11,6 +11,9 @@ import type { Task } from './task';
 })
 
 export class Checkbox {
+
+  changed = output<boolean>();
+
   readonly task = signal<Task>({
     name: 'Parent task',
     completed: false,
@@ -38,6 +41,9 @@ export class Checkbox {
         task.subtasks![index].completed = completed;
         task.completed = task.subtasks?.every(t => t.completed) ?? true;
       }
+
+      this.changed.emit(task.completed);
+
       return {...task};
     });
   }
