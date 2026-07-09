@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { Checkbox } from '../checkbox/checkbox';
-
 
 @Component({
   selector: 'app-card',
@@ -10,14 +9,25 @@ import { Checkbox } from '../checkbox/checkbox';
 })
 
 export class Card {
+
+  showExtraOptions = signal<boolean>(false);
+
+  pageNum = signal<number>(0);
+  languageNum = signal<number>(0);
   
   onServiceToggle(isSelected: boolean) {
-    console.log('¿El servicio SEO está marcado?:', isSelected);
-    
-    if (isSelected){
+    this.showExtraOptions.set(isSelected);
+  }
+
+  changeQuantity(type: 'pages' | 'languages', amount: number) {
+    if (type === 'pages') {
+      const current = this.pageNum();
+      if (current + amount >= 1) this.pageNum.set(current + amount);
     } else {
-      
+      const current = this.languageNum();
+      if (current + amount >= 1) this.languageNum.set(current + amount);
     }
   }
+
 }
 

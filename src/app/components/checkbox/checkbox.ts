@@ -15,7 +15,7 @@ export class Checkbox {
   changed = output<boolean>();
 
   readonly task = signal<Task>({
-    name: 'Parent task',
+    name: 'Afegir',
     completed: false,
     subtasks: [
       {name: 'Child task 1', completed: false},
