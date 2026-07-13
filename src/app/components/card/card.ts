@@ -22,10 +22,10 @@ export class Card {
   changeQuantity(type: 'pages' | 'languages', amount: number) {
     if (type === 'pages') {
       const current = this.pageNum();
-      if (current + amount >= 1) this.pageNum.set(current + amount);
+      if (current + amount >= 0) this.pageNum.set(current + amount);
     } else {
       const current = this.languageNum();
-      if (current + amount >= 1) this.languageNum.set(current + amount);
+      if (current + amount >= 0) this.languageNum.set(current + amount);
     }
   }
 

@@ -37,9 +37,9 @@
                 <div class="flex items-center gap-4">
                     <span class="text-sm font-bold text-gray-700">Nombre de llenguatges</span>
                     <div class="flex items-center gap-2">
-                        <button (click)="changeQuantity('languages', -1)" class="w-6 h-6 flex items-center justify-center rounded-full border border-gray-300 text-gray-400 hover:bg-gray-200 text-sm font-bold">-</button>
-                        <div class="w-14 h-9 bg-white border border-gray-300 rounded-xl flex items-center justify-center font-extrabold text-sm shadow-sm">{{ languageNum() }}</div>
-                        <button (click)="changeQuantity('languages', 1)" class="w-6 h-6 flex items-center justify-center rounded-full border border-gray-300 text-gray-400 hover:bg-gray-200 text-sm font-bold">+</button>
+                        <button data-test-id= "button-pages-minus"(click)="changeQuantity('languages', -1)" class="w-6 h-6 flex items-center justify-center rounded-full border border-gray-300 text-gray-400 hover:bg-gray-200 text-sm font-bold">-</button>
+                        <div data-test-id= "pages-quantity"class="w-14 h-9 bg-white border border-gray-300 rounded-xl flex items-center justify-center font-extrabold text-sm shadow-sm">{{ languageNum() }}</div>
+                        <button data-test-id= "button-pages-plus" (click)="changeQuantity('languages', 1)" class="w-6 h-6 flex items-center justify-center rounded-full border border-gray-300 text-gray-400 hover:bg-gray-200 text-sm font-bold">+</button>
                     </div>
                 </div>
 
