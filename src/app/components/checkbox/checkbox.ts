@@ -1,7 +1,7 @@
 import { Component, computed, signal, output} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {MatCheckboxModule} from '@angular/material/checkbox';
-import type { Task } from './task';
+import type { Task } from '../../models/task';
 
 @Component({
   selector: 'app-checkbox',
