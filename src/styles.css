@@ -1,1 +1,13 @@
 @import "tailwindcss";
+
+@keyframes subtleFloat {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(4px, -4px) rotate(2deg); }
+  50% { transform: translate(0, -8px) rotate(-2deg); }
+  75% { transform: translate(-4px, -4px) rotate(1deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+@utility animate-float-hover {
+  animation: subtleFloat 4s ease-in-out infinite;
+}
