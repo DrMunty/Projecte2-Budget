@@ -1,5 +1,8 @@
 <div class="w-full flex justify-center pt-80 pb-8 p-4 font-sans"> 
-    <div class="group relative w-full max-w-4xl bg-[#f9f9f7] rounded-4xl shadow-md p-10 min-h-45 flex flex-col justify-center gap-6 transition-all duration-300">
+    <div class="group relative w-full max-w-4xl bg-[#f9f9f7] rounded-4xl shadow-md p-10 min-h-45 flex flex-col justify-center gap-6  border"
+    [class.border-2]="showExtraOptions()"
+    [class.border-pink-500]="showExtraOptions()"
+    [class.border-0]="!showExtraOptions()">
         <div class="grid grid-cols-3 items-center w-full gap-4">
 
             <div>
