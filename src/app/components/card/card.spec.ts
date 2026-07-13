@@ -19,4 +19,6 @@ describe('Card', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  
 });
