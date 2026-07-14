@@ -1,1 +1,6 @@
-<p>dashboard works!</p>
+<div 
+class="grid grid-cols-3 items-center w-full gap-4">
+@for (card of myDashboard(); track card.title){
+    <app-card [myDashboard]="card"></app-card>
+}
+</div>

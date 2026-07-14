@@ -1,5 +1,7 @@
 import { Component, signal } from '@angular/core';
 import { Checkbox } from '../checkbox/checkbox';
+import { input } from '@angular/core';
+import { CardData } from '../../models/cardData';
 
 @Component({
   selector: 'app-card',
@@ -11,9 +13,9 @@ import { Checkbox } from '../checkbox/checkbox';
 export class Card {
 
   showExtraOptions = signal<boolean>(false);
-
   pageNum = signal<number>(0);
   languageNum = signal<number>(0);
+  cardData = input.required<CardData>();
   
   onServiceToggle(isSelected: boolean) {
     this.showExtraOptions.set(isSelected);
