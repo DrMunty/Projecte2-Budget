@@ -1,11 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, computed } from '@angular/core';
 import { Card } from '../card/card';
 import { signal } from '@angular/core';
 import type { CardData } from '../../models/cardData';
+import type { CardSelection } from '../../models/cardSelection';
+import { BudgetSummary } from '../budget-summary/budget-summary';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [Card],
+  imports: [Card, BudgetSummary],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })
@@ -31,4 +33,25 @@ myDashboard = signal<CardData[]>([
 
 ]);
 
+
+cardsState = signal<Map<string, CardSelection>>(new Map());
+
+updateCardState(event: CardSelection) {
+  const currentMap = new Map(this.cardsState());
+  
+  if (event.isSelected) {
+    currentMap.set(event.title, event);
+  } else {
+    currentMap.delete(event.title);
+  }
+  this.cardsState.set(currentMap);
+}
+
+totalBudget = computed(() => {
+  let sum = 0;
+  for (const card of this.cardsState().values()) {
+    sum += card.cost;
+  }
+  return sum;
+});
 }

@@ -5,7 +5,7 @@ import { BudgetSummary } from './components/budget-summary/budget-summary';
 
 @Component({
   selector: 'app-root',
-  imports: [Header, Dashboard, BudgetSummary],
+  imports: [Header, Dashboard],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
