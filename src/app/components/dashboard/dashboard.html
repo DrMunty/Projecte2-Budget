@@ -1,5 +1,5 @@
 <div 
-class="grid grid-cols-3 items-center w-full gap-4">
+class="flex flex-col items-center w-full gap-6">
 @for (card of myDashboard(); track card.title){
     <app-card [cardData]="card"></app-card>
 }
