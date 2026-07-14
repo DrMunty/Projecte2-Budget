@@ -1,7 +1,8 @@
-import { Component, signal, input } from '@angular/core';
+import { Component, signal, input, computed, output} from '@angular/core';
 import { Checkbox } from '../checkbox/checkbox';
 import { CardData } from '../../models/cardData';
-import type { CardSelection } from '../../models/cardSelection';
+import { CardSelection } from '../../models/cardSelection';
+
 
 @Component({
   selector: 'app-card',
@@ -17,9 +18,11 @@ export class Card {
   languageNum = signal<number>(0);
   cardData = input.required<CardData>();
   allowExtraOptions = input<boolean>(false);
+  onCardChange = output <CardSelection>();
   
   onServiceToggle(isSelected: boolean) {
     this.showExtraOptions.set(isSelected);
+    this.emitChanges();
   }
 
   changeQuantity(type: 'pages' | 'languages', amount: number) {
@@ -30,7 +33,25 @@ export class Card {
       const current = this.languageNum();
       if (current + amount >= 0) this.languageNum.set(current + amount);
     }
+    this.emitChanges()
   }
 
+  currentCost = computed(() => {
+  const base = this.cardData().price;
+  if (this.showExtraOptions() && this.allowExtraOptions()) {
+    return base + (this.pageNum() + this.languageNum()) * 30;
+  }
+  return base;
+})
+
+emitChanges(): void {
+this.onCardChange.emit({
+    title: this.cardData().title,
+    isSelected: this.showExtraOptions(),
+    cost: this.currentCost()
+  });
 }
+
+  }
+
 
