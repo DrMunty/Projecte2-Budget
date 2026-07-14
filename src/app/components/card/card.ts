@@ -1,6 +1,7 @@
 import { Component, signal, input } from '@angular/core';
 import { Checkbox } from '../checkbox/checkbox';
 import { CardData } from '../../models/cardData';
+import type { CardSelection } from '../../models/cardSelection';
 
 @Component({
   selector: 'app-card',
