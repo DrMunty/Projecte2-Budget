@@ -1,6 +1,5 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, input } from '@angular/core';
 import { Checkbox } from '../checkbox/checkbox';
-import { input } from '@angular/core';
 import { CardData } from '../../models/cardData';
 
 @Component({
@@ -16,6 +15,7 @@ export class Card {
   pageNum = signal<number>(0);
   languageNum = signal<number>(0);
   cardData = input.required<CardData>();
+  allowExtraOptions = input<boolean>(false);
   
   onServiceToggle(isSelected: boolean) {
     this.showExtraOptions.set(isSelected);
