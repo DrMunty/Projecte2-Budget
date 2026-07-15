@@ -13,7 +13,7 @@ class="flex flex-col items-center w-full gap-6">
 <app-budget-summary [totalPrice]="totalBudget()"></app-budget-summary>
 
 @if (totalBudget() !== 0) {
-    <div id="budget-form-container">
+    <div id="budget-form-container" class="pb-30">
   <app-user-form (onSubmitBudget)="saveNewBudget($event)"></app-user-form>
     </div>
 }
