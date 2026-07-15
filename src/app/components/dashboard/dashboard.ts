@@ -58,7 +58,7 @@ totalBudget = computed(() => {
 });
 
 saveNewBudget(budgetDetails: UserFormInterface) {
-    console.log('Datos del usuario:', budgetDetails);
-    console.log('Total del presupuesto:', this.totalBudget());
+    console.log('User info:', budgetDetails);
+    console.log('Total Budget:', this.totalBudget());
 }
 }
