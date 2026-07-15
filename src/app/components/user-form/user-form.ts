@@ -11,4 +11,24 @@ import type { UserFormInterface } from '../../models/userForm';
 })
 export class UserForm {
   
+  userForm: FormGroup;
+  
+  onSubmitBudget = output<UserFormInterface>();
+
+  constructor(private fb: FormBuilder) {
+    this.userForm = this.fb.group({
+      name: ['', Validators.required],
+      phone: ['', [Validators.required, Validators.pattern('^[0-9]{9}$')]],
+      email: ['', [Validators.required, Validators.email]]
+    });
+  }
+
+  submitForm() {
+    if (this.userForm.valid) {
+      const formData: UserFormInterface = this.userForm.value;
+      this.onSubmitBudget.emit(formData);
+      this.userForm.reset();
+    }
+  }
+
 }
