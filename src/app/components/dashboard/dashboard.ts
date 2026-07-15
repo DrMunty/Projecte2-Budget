@@ -39,6 +39,7 @@ myDashboard = signal<CardData[]>([
 cardsState = signal<Map<string, CardSelection>>(new Map());
 
 updateCardState(event: CardSelection) {
+  const wasEmpty = this.cardsState().size === 0;
   const currentMap = new Map(this.cardsState());
   
   if (event.isSelected) {
@@ -47,6 +48,13 @@ updateCardState(event: CardSelection) {
     currentMap.delete(event.title);
   }
   this.cardsState.set(currentMap);
+
+  if (wasEmpty && this.cardsState().size > 0) {
+    this.scrollToElement('budget-form-container');
+  }
+  else if (event.title.toLowerCase().includes('web') && event.isSelected) {
+    this.scrollToElement('web-card');
+  }
 }
 
 totalBudget = computed(() => {
@@ -60,5 +68,17 @@ totalBudget = computed(() => {
 saveNewBudget(budgetDetails: UserFormInterface) {
     console.log('User info:', budgetDetails);
     console.log('Total Budget:', this.totalBudget());
+}
+
+private scrollToElement(elementId: string): void {
+  requestAnimationFrame(() => {
+    const element = document.getElementById(elementId);
+    if (element) {
+      element.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center'
+      });
+    }
+  });
 }
 }

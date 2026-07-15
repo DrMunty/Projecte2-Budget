@@ -1,7 +1,9 @@
 <div 
 class="flex flex-col items-center w-full gap-6">
 @for (card of myDashboard(); track card.title; let isLast = $last){
-    <app-card [cardData]="card"
+    <app-card
+    [id]="isLast ? 'web-card' : ''" 
+    [cardData]="card"
     [allowExtraOptions]="isLast"
     (onCardChange)="updateCardState($event)">
     </app-card>
@@ -11,6 +13,8 @@ class="flex flex-col items-center w-full gap-6">
 <app-budget-summary [totalPrice]="totalBudget()"></app-budget-summary>
 
 @if (totalBudget() !== 0) {
+    <div id="budget-form-container">
   <app-user-form (onSubmitBudget)="saveNewBudget($event)"></app-user-form>
+    </div>
 }
 
