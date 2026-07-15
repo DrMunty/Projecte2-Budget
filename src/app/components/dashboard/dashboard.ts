@@ -3,11 +3,13 @@ import { Card } from '../card/card';
 import { signal } from '@angular/core';
 import type { CardData } from '../../models/cardData';
 import type { CardSelection } from '../../models/cardSelection';
+import type { UserFormInterface } from '../../models/userForm';
 import { BudgetSummary } from '../budget-summary/budget-summary';
+import { UserForm } from '../user-form/user-form';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [Card, BudgetSummary],
+  imports: [Card, BudgetSummary, UserForm],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })
@@ -54,4 +56,9 @@ totalBudget = computed(() => {
   }
   return sum;
 });
+
+saveNewBudget(budgetDetails: UserFormInterface) {
+    console.log('Datos del usuario:', budgetDetails);
+    console.log('Total del presupuesto:', this.totalBudget());
+}
 }

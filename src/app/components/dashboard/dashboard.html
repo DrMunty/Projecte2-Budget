@@ -7,4 +7,10 @@ class="flex flex-col items-center w-full gap-6">
     </app-card>
 }
 </div>
+
 <app-budget-summary [totalPrice]="totalBudget()"></app-budget-summary>
+
+@if (totalBudget() !== 0) {
+  <app-user-form (onSubmitBudget)="saveNewBudget($event)"></app-user-form>
+}
+
