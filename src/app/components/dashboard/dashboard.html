@@ -15,7 +15,9 @@ class="flex flex-col items-center w-full gap-6">
 @if (totalBudget() !== 0) {
     <div id="budget-form-container" class="pb-30">
   <app-user-form (onSubmitBudget)="saveNewBudget($event)"></app-user-form>
-  <app-budget-history> </app-budget-history>
     </div>
 }
+
+  <app-budget-history> </app-budget-history>
+
 
