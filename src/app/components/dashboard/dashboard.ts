@@ -6,10 +6,11 @@ import type { CardSelection } from '../../models/cardSelection';
 import type { UserFormInterface } from '../../models/userForm';
 import { BudgetSummary } from '../budget-summary/budget-summary';
 import { UserForm } from '../user-form/user-form';
+import { BudgetHistory } from '../budget-history/budget-history';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [Card, BudgetSummary, UserForm],
+  imports: [Card, BudgetSummary, UserForm, BudgetHistory],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })
