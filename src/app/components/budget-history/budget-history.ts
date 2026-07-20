@@ -1,4 +1,4 @@
-import { Component, signal, computed } from '@angular/core';
+import { Component, signal, computed, input } from '@angular/core';
 import type { SortOption } from '../../models/sortOption';
 import type { FinalBudget } from '../../models/finalBudget';
 
@@ -11,7 +11,7 @@ import type { FinalBudget } from '../../models/finalBudget';
 
 export class BudgetHistory {
   
-  allBudgets = signal<FinalBudget[]>([]);
+  allBudgets = input.required<FinalBudget[]>();
   searchQuery = signal<string>('');
   sortBy = signal<SortOption>('date');
   sortAscending = signal<boolean>(true);

@@ -1,9 +1,9 @@
-import { Component, computed } from '@angular/core';
+import { Component, computed, signal} from '@angular/core';
 import { Card } from '../card/card';
-import { signal } from '@angular/core';
 import type { CardData } from '../../models/cardData';
 import type { CardSelection } from '../../models/cardSelection';
 import type { UserFormInterface } from '../../models/userForm';
+import type { FinalBudget } from '../../models/finalBudget';
 import { BudgetSummary } from '../budget-summary/budget-summary';
 import { UserForm } from '../user-form/user-form';
 import { BudgetHistory } from '../budget-history/budget-history';
@@ -38,6 +38,7 @@ myDashboard = signal<CardData[]>([
 
 
 cardsState = signal<Map<string, CardSelection>>(new Map());
+budgetList = signal<FinalBudget[]>([])
 
 updateCardState(event: CardSelection) {
   const wasEmpty = this.cardsState().size === 0;
@@ -67,9 +68,20 @@ totalBudget = computed(() => {
 });
 
 saveNewBudget(budgetDetails: UserFormInterface) {
-    console.log('User info:', budgetDetails);
-    console.log('Total Budget:', this.totalBudget());
-}
+  const activeServices = Array.from(this.cardsState().values()).map(card => ({
+      title: card.title,
+      cost: card.cost
+}));
+const newBudget: FinalBudget = {
+      id: Date.now().toString(),
+      client: budgetDetails,
+      services: activeServices,
+      totalPrice: this.totalBudget(),
+      date: new Date()
+    };
+
+    this.budgetList.update(list => [...list, newBudget]);
+  }
 
 private scrollToElement(elementId: string): void {
   requestAnimationFrame(() => {
@@ -83,3 +95,4 @@ private scrollToElement(elementId: string): void {
   });
 }
 }
+
