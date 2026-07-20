@@ -12,30 +12,30 @@
           placeholder="Buscar..."
           [value]="searchQuery()"
           (input)="updateSearchQuery($event)"
-          class="pl-8 pr-4 py-1 rounded-full border border-gray-200 text-xs focus:outline-none focus:ring-1 focus:ring-gray-400 w-36 sm:w-44 bg-transparent"
+          class="pl-8 pr-4 py-1 rounded-full border border-gray-200 text-xs focus:outline-none focus:ring-1 focus:ring-pink-500 w-36 sm:w-44 bg-transparent"
         />
       </div>
 
       <button 
         (click)="changeSort('date')"
-        [class.text-black]="sortBy() === 'date'"
-        class="hover:text-black transition-colors flex items-center gap-1 text-xs sm:text-sm">
+        [ngClass]="sortBy() === 'date' ? 'text-[#ff007a] font-bold' : 'text-gray-500' "
+        class="hover:text-[#ff007a] transition-colors flex items-center gap-1 text-xs sm:text-sm">
         Data
         @if (sortBy() === 'date') { <span class="text-xs">{{ sortAscending() ? '▲' : '▼' }}</span> }
       </button>
 
       <button 
         (click)="changeSort('price')"
-        [class.text-black]="sortBy() === 'price'"
-        class="hover:text-black transition-colors flex items-center gap-1 text-xs sm:text-sm">
+        [ngClass]="sortBy() === 'price' ? 'text-[#ff007a] font-bold' : 'text-gray-500' "
+        class="hover:text-[#ff007a] transition-colors flex items-center gap-1 text-xs sm:text-sm">
         Import
         @if (sortBy() === 'price') { <span class="text-xs">{{ sortAscending() ? '▲' : '▼' }}</span> }
       </button>
 
       <button 
         (click)="changeSort('name')"
-        [class.text-black]="sortBy() === 'name'"
-        class="hover:text-black transition-colors flex items-center gap-1 text-xs sm:text-sm">
+        [ngClass]="sortBy() === 'name' ? 'text-[#ff007a] font-bold' : 'text-gray-500' "
+        class="hover:text-[#ff007a] transition-colors flex items-center gap-1 text-xs sm:text-sm">
         Nom
         @if (sortBy() === 'name') { <span class="text-xs">{{ sortAscending() ? '▲' : '▼' }}</span> }
       </button>

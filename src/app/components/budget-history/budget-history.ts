@@ -1,10 +1,11 @@
 import { Component, signal, computed, input } from '@angular/core';
 import type { SortOption } from '../../models/sortOption';
 import type { FinalBudget } from '../../models/finalBudget';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-budget-history',
-  imports: [],
+  imports: [NgClass],
   templateUrl: './budget-history.html',
   styleUrl: './budget-history.css',
 })
