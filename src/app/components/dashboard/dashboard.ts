@@ -81,6 +81,10 @@ const newBudget: FinalBudget = {
     };
 
     this.budgetList.update(list => [...list, newBudget]);
+    setTimeout(() => {
+    this.scrollToElement('budget-history-container');
+  }, 100);
+  
   }
 
 private scrollToElement(elementId: string): void {

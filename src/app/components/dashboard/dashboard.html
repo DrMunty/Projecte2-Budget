@@ -18,6 +18,9 @@ class="flex flex-col items-center w-full gap-6">
     </div>
 }
 @if (budgetList().length !== 0){
-  <app-budget-history [allBudgets]="budgetList()"> </app-budget-history>}
+  <div id="budget-history-container" class="w-full">
+  <app-budget-history [allBudgets]="budgetList()"> </app-budget-history>
+  </div>
+}
 
 
