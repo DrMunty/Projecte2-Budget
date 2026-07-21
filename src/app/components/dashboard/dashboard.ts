@@ -43,26 +43,7 @@ myDashboard = signal<CardData[]>([
 
 cardsState = signal<Map<string, CardSelection>>(new Map());
 localStorage = inject(LocalStorageService);
-budgetList = signal<FinalBudget[]>(this.loadInitialBudgets());
-
-private loadInitialBudgets(): FinalBudget[] {
-  const saved = this.localStorage.getItem('budgets');
-  
-  if (saved && Array.isArray(saved) && saved.length > 0) {
-    const savedBudgets: FinalBudget[] = saved.map((budget: any) => ({
-      ...budget,
-      date: new Date(budget.date)
-    }));
-
-    const customUserBudgets = savedBudgets.filter(
-      savedBudget => !INITIAL_BUDGETS.some(initial => initial.id === savedBudget.id)
-    );
-
-    return [...INITIAL_BUDGETS, ...customUserBudgets];
-  }
-
-  return INITIAL_BUDGETS;
-}
+budgetList = signal<FinalBudget[]>(this.localStorage.getAllBudgets());
 
 updateCardState(event: CardSelection) {
   const wasEmpty = this.cardsState().size === 0;

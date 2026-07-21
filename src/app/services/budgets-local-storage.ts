@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { FinalBudget } from '../models/finalBudget';
+import { INITIAL_BUDGETS } from '../../../public/data/mock-budgets';
 
 @Injectable({
   providedIn: 'root'
@@ -40,5 +42,24 @@ export class LocalStorageService {
     } catch (e) {
       console.error('Error clearing local storage', e);
     }
+  }
+
+  getAllBudgets(): FinalBudget[] {
+    const saved = this.getItem('budgets');
+    
+    if (saved && Array.isArray(saved) && saved.length > 0) {
+      const savedBudgets: FinalBudget[] = saved.map((budget: any) => ({
+        ...budget,
+        date: new Date(budget.date)
+      }));
+
+      const customUserBudgets = savedBudgets.filter(
+        savedBudget => !INITIAL_BUDGETS.some(initial => initial.id === savedBudget.id)
+      );
+
+      return [...INITIAL_BUDGETS, ...customUserBudgets];
+    }
+
+    return INITIAL_BUDGETS;
   }
 }

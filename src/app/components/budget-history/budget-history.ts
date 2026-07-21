@@ -3,10 +3,11 @@ import type { SortOption } from '../../models/sortOption';
 import type { FinalBudget } from '../../models/finalBudget';
 import { NgClass } from '@angular/common';
 import { DatePipe } from '@angular/common';
+import {RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-budget-history',
-  imports: [NgClass, DatePipe],
+  imports: [NgClass, DatePipe, RouterLink],
   templateUrl: './budget-history.html',
   styleUrl: './budget-history.css',
 })
