@@ -16,7 +16,7 @@ export class BudgetHistory {
   allBudgets = input.required<FinalBudget[]>();
   searchQuery = signal<string>('');
   sortBy = signal<SortOption>('date');
-  sortAscending = signal<boolean>(true);
+  sortAscending = signal<boolean>(false);
 
   filteredBudgets = computed(() => {
     let budgets = [...this.allBudgets()];
@@ -45,9 +45,12 @@ export class BudgetHistory {
       }
 
       if (criterion === 'date') {
+        const timeA = new Date(a.date).getTime();
+        const timeB = new Date(b.date).getTime();
+
         return isAsc 
-          ? a.date.getTime() - b.date.getTime()
-          : b.date.getTime() - a.date.getTime();
+          ? timeA - timeB 
+          : timeB - timeA;
       }
 
       return 0;
@@ -66,7 +69,7 @@ export class BudgetHistory {
       this.sortAscending.update(val => !val);
     } else {
       this.sortBy.set(option);
-      this.sortAscending.set(true);
+      this.sortAscending.set(option === 'date' ? false : true);
     }
   }
 }
