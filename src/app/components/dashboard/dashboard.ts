@@ -81,6 +81,7 @@ const newBudget: FinalBudget = {
     };
 
     this.budgetList.update(list => [...list, newBudget]);
+    this.cardsState.set(new Map());
     setTimeout(() => {
     this.scrollToElement('budget-history-container');
   }, 100);

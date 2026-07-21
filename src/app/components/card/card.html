@@ -22,7 +22,7 @@
         </div>
 
         <div class="justify-self-end mt-4">
-            <app-checkbox (changed)="onServiceToggle($event)"></app-checkbox>
+            <app-checkbox (changed)="onServiceToggle($event)" [checked]="isSelected()"></app-checkbox>
         </div>
     </div>
 

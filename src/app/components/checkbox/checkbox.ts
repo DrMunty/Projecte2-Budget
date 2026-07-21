@@ -1,4 +1,4 @@
-import { Component, computed, signal, output} from '@angular/core';
+import { Component, computed, signal, output, input, effect} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import type { Task } from '../../models/task';
@@ -13,6 +13,8 @@ import type { Task } from '../../models/task';
 export class Checkbox {
 
   changed = output<boolean>();
+  checked = input<boolean>(false);
+
 
   readonly task = signal<Task>({
     name: 'Afegir',
@@ -23,6 +25,19 @@ export class Checkbox {
       {name: 'Child task 3', completed: false},
     ],
   });
+
+  constructor() {
+    effect(() => {
+      const isChecked = this.checked();
+      this.task.update(task => {
+        if (task.completed !== isChecked) {
+          task.completed = isChecked;
+          task.subtasks?.forEach(t => (t.completed = isChecked));
+        }
+        return { ...task };
+      });
+    });
+  }
 
   readonly partiallyComplete = computed(() => {
     const task = this.task();

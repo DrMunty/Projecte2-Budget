@@ -1,4 +1,4 @@
-import { Component, signal, input, computed, output} from '@angular/core';
+import { Component, signal, input, computed, output, effect} from '@angular/core';
 import { Checkbox } from '../checkbox/checkbox';
 import { CardData } from '../../models/cardData';
 import { CardSelection } from '../../models/cardSelection';
@@ -13,12 +13,19 @@ import { CardSelection } from '../../models/cardSelection';
 
 export class Card {
 
+  isSelected = input<boolean>(false);
   showExtraOptions = signal<boolean>(false);
   pageNum = signal<number>(0);
   languageNum = signal<number>(0);
   cardData = input.required<CardData>();
   allowExtraOptions = input<boolean>(false);
   onCardChange = output <CardSelection>();
+  
+  constructor() {
+    effect(() => {
+      this.showExtraOptions.set(this.isSelected());
+    });
+  }
   
   onServiceToggle(isSelected: boolean) {
     this.showExtraOptions.set(isSelected);
