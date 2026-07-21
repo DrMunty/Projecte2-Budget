@@ -9,8 +9,8 @@ export const INITIAL_BUDGETS: FinalBudget[] = [
       phone: 612345678
     },
     services: [
-      { title: "Seo" },
-      { title: "Web", pages: 3, languages: 2 }
+      { title: "Seo", cost: 300},
+      { title: "Web", cost: 500, pages: 3, languages: 2 }
     ],
     totalPrice: 920,
     date: new Date('2026-07-15T10:30:00')
@@ -23,7 +23,7 @@ export const INITIAL_BUDGETS: FinalBudget[] = [
       phone: 688990011
     },
     services: [
-      { title: "Web", pages: 1, languages: 1 }
+      { title: "Web", cost: 500, pages: 1, languages: 1 }
     ],
     totalPrice: 500,
     date: new Date('2026-07-18T14:15:00')
@@ -36,8 +36,8 @@ export const INITIAL_BUDGETS: FinalBudget[] = [
       phone: 655443322 
     },
     services: [
-      { title: "Ads" },
-      { title: "Seo" }
+      { title: "Ads", cost: 400 },
+      { title: "Seo", cost: 300 }
     ],
     totalPrice: 700,
     date: new Date('2026-07-19T09:45:00')
@@ -50,7 +50,7 @@ export const INITIAL_BUDGETS: FinalBudget[] = [
       phone: 633221100
     },
     services: [
-      { title: "Ads" }
+      { title: "Ads", cost: 400 }
     ],
     totalPrice: 400,
     date: new Date('2026-07-20T11:20:00')
@@ -63,9 +63,9 @@ export const INITIAL_BUDGETS: FinalBudget[] = [
       phone: 677889900
     },
     services: [
-      { title: "Seo" },
-      { title: "Ads" },
-      { title: "Web", pages: 4, languages: 2 }
+      { title: "Seo", cost: 300 },
+      { title: "Ads", cost: 400 },
+      { title: "Web", cost: 500, pages: 4, languages: 2 }
     ],
     totalPrice: 1380,
     date: new Date('2026-07-21T08:00:00')

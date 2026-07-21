@@ -6,7 +6,8 @@ client: UserFormInterface
 services: {
     title: string;
     pages?: number;     
-    languages?: number;  
+    languages?: number;
+    cost: number; 
   }[];
   totalPrice: number;    
   date: Date;
