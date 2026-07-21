@@ -1,4 +1,4 @@
-import { Component, computed, signal} from '@angular/core';
+import { Component, computed, signal, inject} from '@angular/core';
 import { Card } from '../card/card';
 import type { CardData } from '../../models/cardData';
 import type { CardSelection } from '../../models/cardSelection';
@@ -8,6 +8,7 @@ import { BudgetSummary } from '../budget-summary/budget-summary';
 import { UserForm } from '../user-form/user-form';
 import { BudgetHistory } from '../budget-history/budget-history';
 import { INITIAL_BUDGETS } from '../../../../public/data/mock-budgets'
+import { LocalStorageService } from '../../services/budgets-local-storage';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,7 +16,9 @@ import { INITIAL_BUDGETS } from '../../../../public/data/mock-budgets'
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })
+
 export class Dashboard {
+
 myDashboard = signal<CardData[]>([
   {
     title: "Seo",
@@ -38,7 +41,27 @@ myDashboard = signal<CardData[]>([
 ]);
 
 cardsState = signal<Map<string, CardSelection>>(new Map());
-budgetList = signal<FinalBudget[]>(INITIAL_BUDGETS);
+localStorage = inject(LocalStorageService);
+budgetList = signal<FinalBudget[]>(this.loadInitialBudgets());
+
+private loadInitialBudgets(): FinalBudget[] {
+  const saved = this.localStorage.getItem('budgets');
+  
+  if (saved && Array.isArray(saved) && saved.length > 0) {
+    const savedBudgets: FinalBudget[] = saved.map((budget: any) => ({
+      ...budget,
+      date: new Date(budget.date)
+    }));
+
+    const customUserBudgets = savedBudgets.filter(
+      savedBudget => !INITIAL_BUDGETS.some(initial => initial.id === savedBudget.id)
+    );
+
+    return [...INITIAL_BUDGETS, ...customUserBudgets];
+  }
+
+  return INITIAL_BUDGETS;
+}
 
 updateCardState(event: CardSelection) {
   const wasEmpty = this.cardsState().size === 0;
@@ -82,7 +105,12 @@ const newBudget: FinalBudget = {
       date: new Date()
     };
 
-    this.budgetList.update(list => [...list, newBudget]);
+    this.budgetList.update(list => {
+      const updatedList = [...list, newBudget];
+      this.localStorage.setItem('budgets', updatedList);
+      return updatedList;
+    });
+    
     this.cardsState.set(new Map());
     setTimeout(() => {
     this.scrollToElement('budget-history-container');
