@@ -9,10 +9,11 @@ import { UserForm } from '../user-form/user-form';
 import { BudgetHistory } from '../budget-history/budget-history';
 import { INITIAL_BUDGETS } from '../../../../public/data/mock-budgets'
 import { LocalStorageService } from '../../services/budgets-local-storage';
+import { Header } from '../header/header';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [Card, BudgetSummary, UserForm, BudgetHistory],
+  imports: [Card, BudgetSummary, UserForm, BudgetHistory, Header],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })
@@ -110,7 +111,7 @@ const newBudget: FinalBudget = {
       this.localStorage.setItem('budgets', updatedList);
       return updatedList;
     });
-    
+
     this.cardsState.set(new Map());
     setTimeout(() => {
     this.scrollToElement('budget-history-container');
