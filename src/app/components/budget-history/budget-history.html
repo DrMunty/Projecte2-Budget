@@ -68,7 +68,7 @@
               <li>
                 <span class="font-semibold text-gray-800">{{ service.title }}</span>
 
-                @if (service.pages || service.languages) {
+                @if ((service.pages ?? 0) > 0 || (service.languages ?? 0) > 0) {
                   <span class="text-gray-500 text-xs ml-1">
                     ({{ service.pages }} {{ service.pages === 1 ? 'pàgina' : 'pàgines' }}, 
                      {{ service.languages }} {{ service.languages === 1 ? 'llenguatge' : 'llenguatges' }})

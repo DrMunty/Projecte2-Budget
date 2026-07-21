@@ -55,7 +55,9 @@ emitChanges(): void {
 this.onCardChange.emit({
     title: this.cardData().title,
     isSelected: this.showExtraOptions(),
-    cost: this.currentCost()
+    cost: this.currentCost(),
+    pages: this.allowExtraOptions() ? this.pageNum() : undefined,
+    languages: this.allowExtraOptions() ? this.languageNum() : undefined,
   });
 }
 
