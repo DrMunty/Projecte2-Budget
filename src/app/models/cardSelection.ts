@@ -1,5 +1,7 @@
 export interface CardSelection{
     title: string,
     isSelected: boolean,
-    cost: number
+    cost: number,
+    pages?: number,
+    languages?: number
 }

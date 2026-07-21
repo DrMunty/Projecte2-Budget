@@ -7,6 +7,7 @@ import type { FinalBudget } from '../../models/finalBudget';
 import { BudgetSummary } from '../budget-summary/budget-summary';
 import { UserForm } from '../user-form/user-form';
 import { BudgetHistory } from '../budget-history/budget-history';
+import { INITIAL_BUDGETS } from '../../../../public/data/mock-budgets'
 
 @Component({
   selector: 'app-dashboard',
@@ -36,9 +37,8 @@ myDashboard = signal<CardData[]>([
 
 ]);
 
-
 cardsState = signal<Map<string, CardSelection>>(new Map());
-budgetList = signal<FinalBudget[]>([])
+budgetList = signal<FinalBudget[]>(INITIAL_BUDGETS);
 
 updateCardState(event: CardSelection) {
   const wasEmpty = this.cardsState().size === 0;
@@ -70,7 +70,9 @@ totalBudget = computed(() => {
 saveNewBudget(budgetDetails: UserFormInterface) {
   const activeServices = Array.from(this.cardsState().values()).map(card => ({
       title: card.title,
-      cost: card.cost
+      cost: card.cost,
+      pages: card.pages,
+      languages: card.languages
 }));
 const newBudget: FinalBudget = {
       id: Date.now().toString(),
