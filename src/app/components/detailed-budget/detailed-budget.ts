@@ -19,4 +19,8 @@ export class DetailedBudget {
     return this.localStorage.getAllBudgets().find(b => b.id === this.id());
   });
 
+  exportToPdf() {
+    window.print();
+  }
+
 }
