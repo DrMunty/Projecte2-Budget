@@ -20,6 +20,15 @@ export class Card {
   cardData = input.required<CardData>();
   allowExtraOptions = input<boolean>(false);
   onCardChange = output <CardSelection>();
+  activeModal = signal <'pages' | 'languages' | null>(null);
+  
+  openInfoModal(type: 'pages' | 'languages'){
+    this.activeModal.set(type);
+  }
+
+  closeInfoModal(){
+    this.activeModal.set(null);
+  }
   
   constructor() {
     effect(() => {
@@ -60,7 +69,6 @@ this.onCardChange.emit({
     languages: this.allowExtraOptions() ? this.languageNum() : undefined,
   });
 }
-
-  }
+}
 
 
