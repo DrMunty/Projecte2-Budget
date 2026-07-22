@@ -56,63 +56,62 @@
 
     </div>
   </div>
-
-  <div class="flex flex-col gap-4 min-h-112.5">
-    @for (budget of filteredBudgets(); track budget.id) {
-      <article class="w-full bg-[#f9f9f7] rounded-3xl sm:rounded-4xl shadow-md p-6 sm:p-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 sm:gap-6 border border-gray-100" aria-labelledby="budget-title-{{budget.id}}">
-        <div class="flex flex-col gap-1 min-w-50">
-          <h3 id="budget-title-{{budget.id}}" class="text-2xl font-extrabold text-[#111111] tracking-tight">
-            {{ budget.client.name }}
-          </h3>
-          <p class="text-sm text-gray-500">{{ budget.client.email }}</p>
-          <p class="text-sm text-gray-500">{{ budget.client.phone }}</p>
-          <p class="text-sm text-gray-500">{{ budget.date | date:'shortDate'}}</p>
-        </div>
-
-        <div class="flex flex-col gap-1 flex-1">
-          <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">Serveis contractats:</span>
-          <ul class="text-sm text-gray-700 space-y-1 list-disc pl-4">
-            @for (service of budget.services; track service.title) {
-              <li>
-                <span class="font-semibold text-gray-800">{{ service.title }}</span>
-
-                @if ((service.pages ?? 0) > 0 || (service.languages ?? 0) > 0) {
-                  <span class="text-gray-500 text-xs ml-1">
-                    ({{ service.pages }} {{ service.pages === 1 ? 'pàgina' : 'pàgines' }}, 
-                     {{ service.languages }} {{ service.languages === 1 ? 'llenguatge' : 'llenguatges' }})
-                  </span>
-                }
-              </li>
-            }
-          </ul>
-        </div>
-        
-        <div class="flex flex-col items-end justify-center gap-1 text-right">
-          <div>
-            <span class="text-xs font-semibold uppercase tracking-wider text-gray-400">TOTAL:</span>
-            <p class="text-3xl font-black text-gray-900 leading-tight">
-              {{ budget.totalPrice }} <span class="text-2xl">€</span>
-            </p>
-          </div>
-          <a 
-            [routerLink]="['/budget', budget.id]" 
-            target="_blank"
-            rel="noopener noreferrer"
-            [attr.aria-label]="'Veure pressupost de ' + budget.client.name + ' en una nova pestanya'"
-            class="mt-1 text-xs font-medium text-gray-500 underline decoration-gray-300 underline-offset-2 transition-colors duration-200 hover:text-green-700 hover:decoration-green-700 pt-2"
-          >
-            Veure pressupost
-          </a>
-          </div>
-      </article>
-    }
-
-     @empty {
-
-      <div class="w-full bg-gray-50 border border-dashed border-gray-200 rounded-4xl p-12 text-center text-gray-400">
-        No s'ha trobat cap pressupost que coincideixi.
+<div class="flex flex-col gap-4 min-h-112.5">
+  @for (budget of filteredBudgets(); track budget.id) {
+    <article class="w-full bg-[#f9f9f7] rounded-3xl sm:rounded-4xl shadow-md p-6 sm:p-10 flex flex-col md:flex-row justify-between items-center md:items-center gap-6 border border-gray-100" aria-labelledby="budget-title-{{budget.id}}">
+      
+      <div class="flex flex-col items-center md:items-start gap-1 min-w-50 text-center md:text-left">
+        <h3 id="budget-title-{{budget.id}}" class="text-2xl font-extrabold text-[#111111] tracking-tight">
+          {{ budget.client.name }}
+        </h3>
+        <p class="text-sm text-gray-500">{{ budget.client.email }}</p>
+        <p class="text-sm text-gray-500">{{ budget.client.phone }}</p>
+        <p class="text-sm text-gray-500">{{ budget.date | date:'shortDate'}}</p>
       </div>
-    }
-  </div>
+
+      <div class="flex flex-col items-center md:items-start gap-2 flex-1 w-full mt-2 md:mt-0">
+        <span class="text-xs font-bold text-gray-400 uppercase tracking-wider text-center md:text-left">Serveis contractats:</span>
+        
+        <ul class="text-sm text-gray-700 space-y-2 md:space-y-1 flex flex-col items-center md:items-start md:list-disc md:pl-4">
+          @for (service of budget.services; track service.title) {
+            <li class="flex flex-col md:block items-center text-center md:text-left">
+              <span class="font-semibold text-gray-800">{{ service.title }}</span>
+              
+              @if ((service.pages ?? 0) > 0 || (service.languages ?? 0) > 0) {
+                <span class="text-gray-500 text-xs md:ml-1 mt-1 md:mt-0">
+                  ({{ service.pages }} {{ service.pages === 1 ? 'pàgina' : 'pàgines' }}, 
+                   {{ service.languages }} {{ service.languages === 1 ? 'llenguatge' : 'llenguatges' }})
+                </span>
+              }
+            </li>
+          }
+        </ul>
+      </div>
+      
+      <div class="flex flex-col items-center md:items-end justify-center gap-1 text-center md:text-right w-full md:w-auto pt-6 md:pt-0 mt-2 md:mt-0 border-t border-gray-200 md:border-none">
+        <div>
+          <span class="text-xs font-semibold uppercase tracking-wider text-gray-400">TOTAL:</span>
+          <p class="text-3xl font-black text-gray-900 leading-tight">
+            {{ budget.totalPrice }} <span class="text-2xl">€</span>
+          </p>
+        </div>
+        <a 
+          [routerLink]="['/budget', budget.id]" 
+          target="_blank"
+          rel="noopener noreferrer"
+          [attr.aria-label]="'Veure pressupost de ' + budget.client.name + ' en una nova pestanya'"
+          class="mt-2 md:mt-1 text-xs font-medium text-gray-500 underline decoration-gray-300 underline-offset-2 transition-colors duration-200 hover:text-green-700 hover:decoration-green-700 pt-2"
+        >
+          Veure pressupost
+        </a>
+      </div>
+    </article>
+  }
+  @empty {
+    <div class="w-full bg-gray-50 border border-dashed border-gray-200 rounded-4xl p-12 text-center text-gray-400">
+      No s'ha trobat cap pressupost que coincideixi.
+    </div>
+  }
+</div>
 
 </div>
