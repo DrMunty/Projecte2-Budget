@@ -96,98 +96,104 @@ The `DetailedBudget` component shows the full content of a selected budget and i
 
 Complete folder structure for the project (workspace root):
 
-```
+```text
 Annexos-20260706/
-	annex-1-projecte-2-briefing.md
-	Mockups/
+    annex-1-projecte-2-briefing.md
+    Mockups/
 budget-albert/
-	angular.json
-	package.json
-	README.md
-	tsconfig.app.json
-	tsconfig.json
-	tsconfig.spec.json
-	public/
-		data/
-			mock-budgets.ts
-		icons/
-	docs/
-		readme-assets/
-			FULL APP OVERVIEW.png
-			HEADER-COMPONENT.png
-			CARDS COMPONENT.png
-			SELECTED CARD COMPONENT.png
-			USER FORM COMPONENT.png
-			BUDGET HISTORY COMPONENT.png
-			DETAILED BUDGET COMPONENT.png
-			PDF PRINT VIEW.png
-	src/
-		index.html
-		main.ts
-		material-theme.scss
-		styles.css
-		app/
-			app.config.ts
-			app.css
-			app.html
-			app.routes.ts
-			app.spec.ts
-			app.ts
-			components/
-				budget-history/
-					budget-history.css
-					budget-history.html
-					budget-history.spec.ts
-					budget-history.ts
-				budget-summary/
-					budget-summary.css
-					budget-summary.html
-					budget-summary.spec.ts
-					budget-summary.ts
-				card/
-					card.css
-					card.html
-					card.spec.ts
-					card.ts
-				checkbox/
-					checkbox.css
-					checkbox.html
-					checkbox.spec.ts
-					checkbox.ts
-				dashboard/
-					dashboard.css
-					dashboard.html
-					dashboard.spec.ts
-					dashboard.ts
-				detailed-budget/
-					detailed-budget.css
-					detailed-budget.html
-					detailed-budget.spec.ts
-					detailed-budget.ts
-				header/
-					header.css
-					header.html
-					header.spec.ts
-					header.ts
-				user-form/
-					user-form.css
-					user-form.html
-					user-form.spec.ts
-					user-form.ts
-			models/
-				cardData.ts
-				cardSelection.ts
-				finalBudget.ts
-				sortOption.ts
-				task.ts
-				userForm.ts
-			services/
-				budgets-local-storage.spec.ts
-				budgets-local-storage.ts
-		test-setup.ts
-		vitest.config.ts
-	.gitignore
-	README.md
+    angular.json
+    package.json
+    README.md
+    tsconfig.app.json
+    tsconfig.json
+    tsconfig.spec.json
+    public/
+        data/
+            mock-budgets.ts
+        icons/
+    docs/
+        readme-assets/
+            FULL APP OVERVIEW.png
+            HEADER-COMPONENT.png
+            CARDS COMPONENT.png
+            SELECTED CARD COMPONENT.png
+            USER FORM COMPONENT.png
+            USER FORM COMPONENT EMPTY FIELDS.png
+            USER FORM FULL COMPONENT.png
+            USER FORM AND BUDGET HISTORY MOBILE VIEW.png
+            BUDGET HISTORY COMPONENT.png
+            BUDGET HISTORY CARD WITH FILTER COMPONENT.png
+            DETAILED BUDGET COMPONENT.png
+            PDF PRINT VIEW.png
+            VERCEL-DASHBOARD.png
+            PROJECT-KANBAN.png
+    src/
+        index.html
+        main.ts
+        material-theme.scss
+        styles.css
+        app/
+            app.config.ts
+            app.css
+            app.html
+            app.routes.ts
+            app.spec.ts
+            app.ts
+            components/
+                budget-history/
+                    budget-history.css
+                    budget-history.html
+                    budget-history.spec.ts
+                    budget-history.ts
+                budget-summary/
+                    budget-summary.css
+                    budget-summary.html
+                    budget-summary.spec.ts
+                    budget-summary.ts
+                card/
+                    card.css
+                    card.html
+                    card.spec.ts
+                    card.ts
+                checkbox/
+                    checkbox.css
+                    checkbox.html
+                    checkbox.spec.ts
+                    checkbox.ts
+                dashboard/
+                    dashboard.css
+                    dashboard.html
+                    dashboard.spec.ts
+                    dashboard.ts
+                detailed-budget/
+                    detailed-budget.css
+                    detailed-budget.html
+                    detailed-budget.spec.ts
+                    detailed-budget.ts
+                header/
+                    header.css
+                    header.html
+                    header.spec.ts
+                    header.ts
+                user-form/
+                    user-form.css
+                    user-form.html
+                    user-form.spec.ts
+                    user-form.ts
+            models/
+                cardData.ts
+                cardSelection.ts
+                finalBudget.ts
+                sortOption.ts
+                task.ts
+                userForm.ts
+            services/
+                budgets-local-storage.spec.ts
+                budgets-local-storage.ts
+    test-setup.ts
+    vitest.config.ts
+    .gitignore
+    README.md
 ```
 
 ---
@@ -236,28 +242,40 @@ This project includes component specifications for all major views and logic pat
 
 ---
 
+## Project planning (Kanban)
+
+The project's Kanban board is available on Trello:
+
+[Budget Albert Trello board](https://trello.com/b/vvb3pweT/budget-albert)
+
+Screenshot of the board (stored in `docs/readme-assets/`):
+
+![Project Kanban](docs/readme-assets/PROJECT-KANBAN.png)
+
+---
+
 ## Deployment with Vercel
 
 The project is deployed to Vercel. Live site:
 
-https://projecte2-budget-albert.vercel.app
+[https://projecte2-budget-albert.vercel.app](https://projecte2-budget-albert.vercel.app)
 
 If you need to re-deploy or connect a new repository, use these settings:
 
 1. Connect the repository to Vercel.
-2. Set the build command to:
+1. Set the build command to:
 
 ```bash
 npm run build
 ```
 
-3. Set the output directory to:
+1. Set the output directory to:
 
 ```text
 dist/budget-albert
 ```
 
-4. Deploy.
+1. Deploy.
 
 These settings were used to produce the currently published site above.
 
@@ -267,17 +285,17 @@ You can add a `vercel.json` at the project root to pin the build/output settings
 
 ```json
 {
-	"version": 2,
-	"builds": [
-		{
-			"src": "package.json",
-			"use": "@vercel/static-build",
-			"config": { "distDir": "dist/budget-albert" }
-		}
-	],
-	"routes": [
-		{ "src": "/(.*)", "dest": "/index.html" }
-	]
+  "version": 2,
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": { "distDir": "dist/budget-albert" }
+    }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "/index.html" }
+  ]
 }
 ```
 
@@ -306,7 +324,9 @@ You can add a `vercel.json` at the project root to pin the build/output settings
 Screenshots used for the README are stored in `docs/readme-assets/`.
 
 ## License & Credits
+
 Developed by:
+
 - Albert Muntal Perez
-- Linkedin: https://www.linkedin.com/in/albert-muntal-perez-a626a0120/
-- GitHub: https://github.com/DrMunty
+- LinkedIn: [https://www.linkedin.com/in/albert-muntal-perez-a626a0120/](https://www.linkedin.com/in/albert-muntal-perez-a626a0120/)
+- GitHub: [https://github.com/DrMunty](https://github.com/DrMunty)
