@@ -16,30 +16,30 @@
           placeholder="Buscar..."
           [value]="searchQuery()"
           (input)="updateSearchQuery($event)"
-          class="pl-8 pr-4 py-1 rounded-full border border-gray-200 text-xs focus:outline-none focus:ring-1 focus:ring-green-500 w-36 sm:w-44 bg-transparent"
+          class="pl-8 pr-4 py-1 rounded-full border border-gray-200 text-xs focus:outline-none focus:ring-1 focus:ring-green-600 w-36 sm:w-44 bg-transparent"
         />
       </div>
 
       <button 
         (click)="changeSort('date')"
-        [ngClass]="sortBy() === 'date' ? 'text-green-500 font-bold' : 'text-gray-500' "
-        class="hover:text-green-500  transition-colors flex items-center gap-1 text-xs sm:text-sm">
+        [ngClass]="sortBy() === 'date' ? 'text-green-600 font-bold' : 'text-gray-500' "
+        class="hover:text-green-600  transition-colors flex items-center gap-1 text-xs sm:text-sm">
         Data
         @if (sortBy() === 'date') { <span class="text-xs">{{ sortAscending() ? '▲' : '▼' }}</span> }
       </button>
 
       <button 
         (click)="changeSort('price')"
-        [ngClass]="sortBy() === 'price' ? 'text-green-500  font-bold' : 'text-gray-500' "
-        class="hover:text-green-500  transition-colors flex items-center gap-1 text-xs sm:text-sm">
+        [ngClass]="sortBy() === 'price' ? 'text-green-600  font-bold' : 'text-gray-500' "
+        class="hover:text-green-600  transition-colors flex items-center gap-1 text-xs sm:text-sm">
         Import
         @if (sortBy() === 'price') { <span class="text-xs">{{ sortAscending() ? '▲' : '▼' }}</span> }
       </button>
 
       <button 
         (click)="changeSort('name')"
-        [ngClass]="sortBy() === 'name' ? 'text-green-500  font-bold' : 'text-gray-500' "
-        class="hover:text-green-500  transition-colors flex items-center gap-1 text-xs sm:text-sm">
+        [ngClass]="sortBy() === 'name' ? 'text-green-600  font-bold' : 'text-gray-500' "
+        class="hover:text-green-600  transition-colors flex items-center gap-1 text-xs sm:text-sm">
         Nom
         @if (sortBy() === 'name') { <span class="text-xs">{{ sortAscending() ? '▲' : '▼' }}</span> }
       </button>
@@ -89,7 +89,7 @@
           <a 
           [routerLink]="['/budget', budget.id]" 
           target="_blank" 
-          class="mt-1 text-xs font-medium text-gray-500 underline decoration-gray-300 underline-offset-2 transition-colors duration-200 hover:text-pink-500 hover:decoration-pink-500 pt-2">
+          class="mt-1 text-xs font-medium text-gray-500 underline decoration-gray-300 underline-offset-2 transition-colors duration-200 hover:text-green-700 hover:decoration-green-700 pt-2">
           Veure pressupost
         </a>
       </div>
