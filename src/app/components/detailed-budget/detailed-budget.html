@@ -20,27 +20,31 @@
     </div>
 
     <div class="mb-8">
-  <h2 class="text-sm font-semibold text-green-800 uppercase tracking-wider mb-4">Serveis Contractats</h2>
-  <ul class="space-y-3">
-    @for (service of data.services; track service.title) {
-      <li class="flex justify-between items-center p-3 border-b border-gray-100">
-        <div>
-          <span class="font-semibold text-black">{{ service.title }}</span>
-          @if (service.pages) {
-            <span class="text-xs text-gray-500 block">
-              ({{ service.pages }} pàgines, {{ service.languages }} idiomes)
-            </span>
-          }
-        </div>
+      <h2 class="text-sm font-semibold text-green-800 uppercase tracking-wider mb-4">Serveis Contractats</h2>
+      <ul class="space-y-3">
+        @for (service of data.services; track service.title) {
+          <li class="p-3 border-b border-gray-100">
+            <div class="flex justify-between items-center">
+              <span class="font-semibold text-black">{{ service.title }}</span>
+              <span class="font-bold text-gray-800">{{ service.cost }} €</span>
+            </div>
 
-        <!-- ⚡ Coste individual de este servicio ⚡ -->
-        <div class="text-right">
-          <span class="font-bold text-gray-800">{{ service.cost }} €</span>
-        </div>
-      </li>
-    }
-  </ul>
-</div>
+            @if (service.pages && service.languages) {
+              <div class="mt-2 pl-4 text-xs text-gray-600 space-y-1 border-l-2 border-pink-300">
+                <div class="flex justify-between">
+                  <span>• {{ service.pages }} {{ service.pages === 1 ? 'pàgina' : 'pàgines' }} (30 € / pàg)</span>
+                  <span class="font-medium text-gray-700">{{ service.pages * 30 }} €</span>
+                </div>
+                <div class="flex justify-between">
+                  <span>• {{ service.languages }} {{ service.languages === 1 ? 'idioma' : 'idiomes' }} (30 € / idioma)</span>
+                  <span class="font-medium text-gray-700">{{ service.languages * 30 }} €</span>
+                </div>
+              </div>
+            }
+          </li>
+        }
+      </ul>
+    </div>
 
     <div class="flex justify-between items-center pt-4 border-t border-gray-200">
       <span class="text-xl font-bold text-black">Total:</span>
