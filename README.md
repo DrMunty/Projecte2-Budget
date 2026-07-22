@@ -71,7 +71,6 @@ It is mobile-friendly and accessible.
 ![User form filled component](docs/readme-assets/USER%20FORM%20FULL%20COMPONENT.png)
 ![Mobile user form](docs/readme-assets/USER%20FORM%20AND%20BUDGET%20HISTORY%20MOBILE%20VIEW.png)
 
-
 ### Budget History
 
 The `BudgetHistory` component keeps a running list of submitted budgets. It includes:
