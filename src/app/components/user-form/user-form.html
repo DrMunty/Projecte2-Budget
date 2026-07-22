@@ -1,68 +1,86 @@
 <div class="w-full max-w-4xl mx-auto bg-white rounded-3xl p-8 shadow-sm border border-gray-100 font-sans mt-4">
-  <h3 class="text-2xl font-bold text-gray-900 mb-6">Demanar pressupost</h3>
+  <section aria-labelledby="budget-form-heading">
+    <h3 id="budget-form-heading" class="text-2xl font-bold text-gray-900 mb-6">Demanar pressupost</h3>
+
+    <form [formGroup]="userForm" (ngSubmit)="submitForm()" aria-labelledby="budget-form-heading" novalidate class="flex flex-col gap-4 items-stretch md:grid md:grid-cols-3 md:gap-4">
+      <div class="w-full">
   
-  <form [formGroup]="userForm" (ngSubmit)="submitForm()" class="flex flex-col md:flex-row gap-4 items-start">
+        <input
+          id="name"
+          type="text"
+          formControlName="name"
+          placeholder="Nom i Cognom"
+          autocomplete="name"
+          class="w-full px-4 py-3 rounded-xl border focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent placeholder-gray-400 text-gray-700 transition-colors"
+          [class.border-red-500]="userForm.get('name')?.invalid && userForm.get('name')?.touched"
+          [class.border-gray-200]="!(userForm.get('name')?.invalid && userForm.get('name')?.touched)"
+          [attr.aria-invalid]="userForm.get('name')?.invalid && userForm.get('name')?.touched"
+          [attr.aria-describedby]="userForm.get('name')?.invalid && userForm.get('name')?.touched ? 'name-error' : null"
+        />
+        @if (userForm.get('name')?.invalid && userForm.get('name')?.touched) {
+          <span id="name-error" role="alert" class="text-xs text-red-500 font-medium mt-1 block pl-1">
+            El nom és obligatori.
+          </span>
+        }
+      </div>
+
+      <div class="w-full">
+      
+        <input
+          id="phone"
+          type="tel"
+          formControlName="phone"
+          placeholder="Telèfon"
+          autocomplete="tel"
+          inputmode="tel"
+          class="w-full px-4 py-3 rounded-xl border focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent placeholder-gray-400 text-gray-700 transition-colors"
+          [class.border-red-500]="userForm.get('phone')?.invalid && userForm.get('phone')?.touched"
+          [class.border-gray-200]="!(userForm.get('phone')?.invalid && userForm.get('phone')?.touched)"
+          [attr.aria-invalid]="userForm.get('phone')?.invalid && userForm.get('phone')?.touched"
+          [attr.aria-describedby]="userForm.get('phone')?.invalid && userForm.get('phone')?.touched ? 'phone-error' : null"
+        />
+        @if (userForm.get('phone')?.invalid && userForm.get('phone')?.touched) {
+          <span id="phone-error" role="alert" class="text-xs text-red-500 font-medium mt-1 block pl-1">
+            El telèfon és obligatori.
+          </span>
+        }
+      </div>
+
+      <div class="w-full">
     
-    <div class="w-full">
-      <input 
-        type="text" 
-        formControlName="name"
-        placeholder="Nom i Cognom" 
-        class="w-full px-4 py-3 rounded-xl border focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent placeholder-gray-400 text-gray-700 transition-colors"
-        [class.border-red-500]="userForm.get('name')?.invalid && userForm.get('name')?.touched"
-        [class.border-gray-200]="!(userForm.get('name')?.invalid && userForm.get('name')?.touched)"
-      />
-      @if (userForm.get('name')?.invalid && userForm.get('name')?.touched) {
-        <span class="text-xs text-red-500 font-medium mt-1 block pl-1">
-          El nom és obligatori.
-        </span>
-      }
-    </div>
+        <input
+          id="email"
+          type="email"
+          formControlName="email"
+          placeholder="Email"
+          autocomplete="email"
+          class="w-full px-4 py-3 rounded-xl border focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent placeholder-gray-400 text-gray-700 transition-colors"
+          [class.border-red-500]="userForm.get('email')?.invalid && userForm.get('email')?.touched"
+          [class.border-gray-200]="!(userForm.get('email')?.invalid && userForm.get('email')?.touched)"
+          [attr.aria-invalid]="userForm.get('email')?.invalid && userForm.get('email')?.touched"
+          [attr.aria-describedby]="userForm.get('email')?.touched && userForm.get('email')?.errors ? 'email-error' : null"
+        />
+        @if (userForm.get('email')?.touched && userForm.get('email')?.errors?.['required']) {
+          <span id="email-error" role="alert" class="text-xs text-red-500 font-medium mt-1 block pl-1">
+            L'email és obligatori.
+          </span>
+        }
+        @if (userForm.get('email')?.touched && userForm.get('email')?.errors?.['email']) {
+          <span id="email-error" role="alert" class="text-xs text-red-500 font-medium mt-1 block pl-1">
+            Email no vàlid.
+          </span>
+        }
+      </div>
 
-    <div class="w-full">
-      <input 
-        type="tel" 
-        formControlName="phone"
-        placeholder="Telèfon" 
-        class="w-full px-4 py-3 rounded-xl border focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent placeholder-gray-400 text-gray-700 transition-colors"
-        [class.border-red-500]="userForm.get('phone')?.invalid && userForm.get('phone')?.touched"
-        [class.border-gray-200]="!(userForm.get('phone')?.invalid && userForm.get('phone')?.touched)"
-      />
-      @if (userForm.get('phone')?.invalid && userForm.get('phone')?.touched) {
-        <span class="text-xs text-red-500 font-medium mt-1 block pl-1">
-          El telèfon és obligatori.
-        </span>
-      }
-    </div>
-
-    <div class="w-full">
-      <input 
-        type="email" 
-        formControlName="email"
-        placeholder="Email" 
-        class="w-full px-4 py-3 rounded-xl border focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent placeholder-gray-400 text-gray-700 transition-colors"
-        [class.border-red-500]="userForm.get('email')?.invalid && userForm.get('email')?.touched"
-        [class.border-gray-200]="!(userForm.get('email')?.invalid && userForm.get('email')?.touched)"
-      />
-      @if (userForm.get('email')?.touched && userForm.get('email')?.errors?.['required']) {
-        <span class="text-xs text-red-500 font-medium mt-1 block pl-1">
-          L'email és obligatori.
-        </span>
-      }
-      @if (userForm.get('email')?.touched && userForm.get('email')?.errors?.['email']) {
-        <span class="text-xs text-red-500 font-medium mt-1 block pl-1">
-          Email no vàlid.
-        </span>
-      }
-    </div>
-
-    <button 
-      type="submit" 
-      [disabled]="userForm.invalid"
-      class="w-full md:w-auto whitespace-nowrap bg-green-800 hover:bg-green-500 disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-semibold py-3 px-6 rounded-xl flex items-center justify-center gap-2 transition-colors cursor-pointer"
-    >
-      Sol·licitar pressupost →
-    </button>
-
-  </form>
+      <div class="w-full md:col-span-3 flex justify-end">
+        <button
+          type="submit"
+          [disabled]="userForm.invalid"
+          class="w-full md:w-auto whitespace-nowrap bg-green-800 hover:bg-green-500 disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-semibold py-3 px-6 rounded-xl flex items-center justify-center gap-2 transition-colors cursor-pointer md:self-end"
+        >
+          Sol·licitar pressupost →
+        </button>
+      </div>
+    </form>
+  </section>
 </div>

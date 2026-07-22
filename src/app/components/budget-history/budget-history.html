@@ -1,17 +1,18 @@
-<div class="w-full max-w-4xl mx-auto flex flex-col gap-6 pt-10 pl-2 pr-2 pb-12 font-sans">
-  
+<div class="w-full max-w-4xl mx-auto flex flex-col gap-6 pt-10 pl-2 pr-2 pb-12 font-sans" aria-labelledby="budget-history-heading">
   <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-    <span class="text-xl font-bold text-[#111111]">Pressupostos en curs:</span>
+    <h2 id="budget-history-heading" class="text-xl font-bold text-[#111111]">Pressupostos en curs:</h2>
     
     <div class="flex flex-wrap items-center gap-4 text-sm text-gray-500 font-semibold">
-      
       <div class="relative flex items-center">
+        <label for="budget-search" class="sr-only">Buscar pressupostos</label>
         <img 
         src="icons/search.png" 
         alt="Search icon" 
         class="absolute left-3 w-4 h-4 object-contain pointer-events-none opacity-60"
+        aria-hidden="true"
         />
         <input 
+          id="budget-search"
           type="text" 
           placeholder="Buscar..."
           [value]="searchQuery()"
@@ -21,25 +22,34 @@
       </div>
 
       <button 
+        type="button"
         (click)="changeSort('date')"
         [ngClass]="sortBy() === 'date' ? 'text-green-600 font-bold' : 'text-gray-500' "
-        class="hover:text-green-600  transition-colors flex items-center gap-1 text-xs sm:text-sm">
+        [attr.aria-pressed]="sortBy() === 'date'"
+        class="hover:text-green-600  transition-colors flex items-center gap-1 text-xs sm:text-sm"
+      >
         Data
         @if (sortBy() === 'date') { <span class="text-xs">{{ sortAscending() ? '▲' : '▼' }}</span> }
       </button>
 
       <button 
+        type="button"
         (click)="changeSort('price')"
         [ngClass]="sortBy() === 'price' ? 'text-green-600  font-bold' : 'text-gray-500' "
-        class="hover:text-green-600  transition-colors flex items-center gap-1 text-xs sm:text-sm">
+        [attr.aria-pressed]="sortBy() === 'price'"
+        class="hover:text-green-600  transition-colors flex items-center gap-1 text-xs sm:text-sm"
+      >
         Import
         @if (sortBy() === 'price') { <span class="text-xs">{{ sortAscending() ? '▲' : '▼' }}</span> }
       </button>
 
       <button 
+        type="button"
         (click)="changeSort('name')"
         [ngClass]="sortBy() === 'name' ? 'text-green-600  font-bold' : 'text-gray-500' "
-        class="hover:text-green-600  transition-colors flex items-center gap-1 text-xs sm:text-sm">
+        [attr.aria-pressed]="sortBy() === 'name'"
+        class="hover:text-green-600  transition-colors flex items-center gap-1 text-xs sm:text-sm"
+      >
         Nom
         @if (sortBy() === 'name') { <span class="text-xs">{{ sortAscending() ? '▲' : '▼' }}</span> }
       </button>
@@ -49,13 +59,11 @@
 
   <div class="flex flex-col gap-4 min-h-112.5">
     @for (budget of filteredBudgets(); track budget.id) {
-      
-      <div class="w-full bg-[#f9f9f7] rounded-4xl shadow-md p-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border border-gray-100">
-        
+      <article class="w-full bg-[#f9f9f7] rounded-4xl shadow-md p-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border border-gray-100" aria-labelledby="budget-title-{{budget.id}}">
         <div class="flex flex-col gap-1 min-w-50">
-          <h2 class="text-2xl font-extrabold text-[#111111] tracking-tight">
+          <h3 id="budget-title-{{budget.id}}" class="text-2xl font-extrabold text-[#111111] tracking-tight">
             {{ budget.client.name }}
-          </h2>
+          </h3>
           <p class="text-sm text-gray-500">{{ budget.client.email }}</p>
           <p class="text-sm text-gray-500">{{ budget.client.phone }}</p>
           <p class="text-sm text-gray-500">{{ budget.date | date:'shortDate'}}</p>
@@ -87,16 +95,18 @@
             </p>
           </div>
           <a 
-          [routerLink]="['/budget', budget.id]" 
-          target="_blank" 
-          class="mt-1 text-xs font-medium text-gray-500 underline decoration-gray-300 underline-offset-2 transition-colors duration-200 hover:text-green-700 hover:decoration-green-700 pt-2">
-          Veure pressupost
-        </a>
-      </div>
-    
-    </div>
-
-    } @empty {
+            [routerLink]="['/budget', budget.id]" 
+            target="_blank"
+            rel="noopener noreferrer"
+            [attr.aria-label]="'Veure pressupost de ' + budget.client.name + ' en una nova pestanya'"
+            class="mt-1 text-xs font-medium text-gray-500 underline decoration-gray-300 underline-offset-2 transition-colors duration-200 hover:text-green-700 hover:decoration-green-700 pt-2"
+          >
+            Veure pressupost
+          </a>
+          </div>
+      </article>
+    }
+    @empty {
 
       <div class="w-full bg-gray-50 border border-dashed border-gray-200 rounded-4xl p-12 text-center text-gray-400">
         No s'ha trobat cap pressupost que coincideixi.
