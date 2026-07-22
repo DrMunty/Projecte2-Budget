@@ -10,7 +10,7 @@ export const INITIAL_BUDGETS: FinalBudget[] = [
     },
     services: [
       { title: "Seo", cost: 300},
-      { title: "Web", cost: 500, pages: 3, languages: 2 }
+      { title: "Web", cost: 650, pages: 3, languages: 2 }
     ],
     totalPrice: 920,
     date: new Date('2026-07-15T10:30:00')
@@ -23,7 +23,7 @@ export const INITIAL_BUDGETS: FinalBudget[] = [
       phone: 688990011
     },
     services: [
-      { title: "Web", cost: 500, pages: 1, languages: 1 }
+      { title: "Web", cost: 560, pages: 1, languages: 1 }
     ],
     totalPrice: 500,
     date: new Date('2026-07-18T14:15:00')
@@ -65,7 +65,7 @@ export const INITIAL_BUDGETS: FinalBudget[] = [
     services: [
       { title: "Seo", cost: 300 },
       { title: "Ads", cost: 400 },
-      { title: "Web", cost: 500, pages: 4, languages: 2 }
+      { title: "Web", cost: 680, pages: 4, languages: 2 }
     ],
     totalPrice: 1380,
     date: new Date('2026-07-21T08:00:00')

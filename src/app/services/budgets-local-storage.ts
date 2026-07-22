@@ -44,22 +44,49 @@ export class LocalStorageService {
     }
   }
 
-  getAllBudgets(): FinalBudget[] {
-    const saved = this.getItem('budgets');
-    
-    if (saved && Array.isArray(saved) && saved.length > 0) {
-      const savedBudgets: FinalBudget[] = saved.map((budget: any) => ({
-        ...budget,
-        date: new Date(budget.date)
-      }));
+getAllBudgets(): FinalBudget[] {
+  const saved = this.getItem('budgets');
+  let fullList: FinalBudget[] = INITIAL_BUDGETS;
 
-      const customUserBudgets = savedBudgets.filter(
-        savedBudget => !INITIAL_BUDGETS.some(initial => initial.id === savedBudget.id)
-      );
+  if (saved && Array.isArray(saved) && saved.length > 0) {
+    const savedBudgets: FinalBudget[] = saved.map((budget: any) => ({
+      ...budget,
+      date: new Date(budget.date)
+    }));
 
-      return [...INITIAL_BUDGETS, ...customUserBudgets];
-    }
+    const customUserBudgets = savedBudgets.filter(
+      savedBudget => !INITIAL_BUDGETS.some(initial => initial.id === savedBudget.id)
+    );
 
-    return INITIAL_BUDGETS;
+    fullList = [...INITIAL_BUDGETS, ...customUserBudgets];
   }
+
+  return fullList.map(budget => {
+    let calculatedTotal = 0;
+
+    const updatedServices = budget.services.map((service: any) => {
+      const basePrices: Record<string, number> = { seo: 300, ads: 400, web: 500 };
+      const titleKey = service.title.toLowerCase();
+      const basePrice = basePrices[titleKey] ?? 0;
+
+      const extras = (service.pages && service.languages)
+        ? (service.pages + service.languages) * 30
+        : 0;
+
+      const serviceCost = service.cost ?? (basePrice + extras);
+      calculatedTotal += serviceCost;
+
+      return {
+        ...service,
+        cost: serviceCost
+      };
+    });
+
+    return {
+      ...budget,
+      services: updatedServices,
+      totalPrice: budget.totalPrice || calculatedTotal
+    };
+  });
+}
 }

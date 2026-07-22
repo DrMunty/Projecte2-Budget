@@ -15,8 +15,8 @@ export class Card {
 
   isSelected = input<boolean>(false);
   showExtraOptions = signal<boolean>(false);
-  pageNum = signal<number>(0);
-  languageNum = signal<number>(0);
+  pageNum = signal<number>(1);
+  languageNum = signal<number>(1);
   cardData = input.required<CardData>();
   allowExtraOptions = input<boolean>(false);
   onCardChange = output <CardSelection>();
@@ -35,10 +35,10 @@ export class Card {
   changeQuantity(type: 'pages' | 'languages', amount: number) {
     if (type === 'pages') {
       const current = this.pageNum();
-      if (current + amount >= 0) this.pageNum.set(current + amount);
+      if (current + amount >= 1) this.pageNum.set(current + amount);
     } else {
       const current = this.languageNum();
-      if (current + amount >= 0) this.languageNum.set(current + amount);
+      if (current + amount >= 1) this.languageNum.set(current + amount);
     }
     this.emitChanges()
   }
