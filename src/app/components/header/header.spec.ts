@@ -29,6 +29,5 @@ describe('Header', () => {
     expect(h1Element).toBeTruthy();
     expect(h1Element?.textContent?.trim()).toContain('Aconsegueix la millor qualitat');
   });
-
 });
 

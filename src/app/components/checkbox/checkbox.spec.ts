@@ -20,17 +20,16 @@ describe('Checkbox', () => {
     expect(component).toBeTruthy();
   });
 
-  it ('should start with the checkbox unchecked', ()=> {
-    let checkBoxElement: HTMLInputElement = fixture.nativeElement.querySelector('input[type="checkbox"]');
+  it('should start with the checkbox unchecked', () => {
+    const checkBoxElement: HTMLInputElement = fixture.nativeElement.querySelector('input[type="checkbox"]');
     expect(checkBoxElement.checked).toBe(false);
   });
 
-   it ('should change status to checked when the user clicks on it', ()=> {
-     let checkBoxElement: HTMLInputElement = fixture.nativeElement.querySelector('input[type="checkbox"]');
-     expect(checkBoxElement.checked).toBe(false);
-     checkBoxElement.click();
-     fixture.detectChanges();
-     expect(checkBoxElement.checked).toBe(true);
-   });
-
+  it('should change status to checked when the user clicks on it', () => {
+    const checkBoxElement: HTMLInputElement = fixture.nativeElement.querySelector('input[type="checkbox"]');
+    expect(checkBoxElement.checked).toBe(false);
+    checkBoxElement.click();
+    fixture.detectChanges();
+    expect(checkBoxElement.checked).toBe(true);
+  });
 });
