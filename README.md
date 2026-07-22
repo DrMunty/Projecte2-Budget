@@ -94,13 +94,101 @@ The `DetailedBudget` component shows the full content of a selected budget and i
 
 ## Project structure
 
-Key folders and files:
+Complete folder structure for the project (workspace root):
 
-- `src/app/components/` — component templates, styles, and tests
-- `src/app/services/budgets-local-storage.ts` — local storage persistence for budgets
-- `src/app/models/` — TypeScript interfaces for budget, card, and form data
-- `src/public/data/mock-budgets.ts` — initial budget examples
-- `docs/readme-assets/` — screenshots used in this README
+```
+Annexos-20260706/
+	annex-1-projecte-2-briefing.md
+	Mockups/
+budget-albert/
+	angular.json
+	package.json
+	README.md
+	tsconfig.app.json
+	tsconfig.json
+	tsconfig.spec.json
+	public/
+		data/
+			mock-budgets.ts
+		icons/
+	docs/
+		readme-assets/
+			FULL APP OVERVIEW.png
+			HEADER-COMPONENT.png
+			CARDS COMPONENT.png
+			SELECTED CARD COMPONENT.png
+			USER FORM COMPONENT.png
+			BUDGET HISTORY COMPONENT.png
+			DETAILED BUDGET COMPONENT.png
+			PDF PRINT VIEW.png
+	src/
+		index.html
+		main.ts
+		material-theme.scss
+		styles.css
+		app/
+			app.config.ts
+			app.css
+			app.html
+			app.routes.ts
+			app.spec.ts
+			app.ts
+			components/
+				budget-history/
+					budget-history.css
+					budget-history.html
+					budget-history.spec.ts
+					budget-history.ts
+				budget-summary/
+					budget-summary.css
+					budget-summary.html
+					budget-summary.spec.ts
+					budget-summary.ts
+				card/
+					card.css
+					card.html
+					card.spec.ts
+					card.ts
+				checkbox/
+					checkbox.css
+					checkbox.html
+					checkbox.spec.ts
+					checkbox.ts
+				dashboard/
+					dashboard.css
+					dashboard.html
+					dashboard.spec.ts
+					dashboard.ts
+				detailed-budget/
+					detailed-budget.css
+					detailed-budget.html
+					detailed-budget.spec.ts
+					detailed-budget.ts
+				header/
+					header.css
+					header.html
+					header.spec.ts
+					header.ts
+				user-form/
+					user-form.css
+					user-form.html
+					user-form.spec.ts
+					user-form.ts
+			models/
+				cardData.ts
+				cardSelection.ts
+				finalBudget.ts
+				sortOption.ts
+				task.ts
+				userForm.ts
+			services/
+				budgets-local-storage.spec.ts
+				budgets-local-storage.ts
+		test-setup.ts
+		vitest.config.ts
+	.gitignore
+	README.md
+```
 
 ---
 
@@ -150,9 +238,11 @@ This project includes component specifications for all major views and logic pat
 
 ## Deployment with Vercel
 
-This project is ready to deploy on Vercel.
+The project is deployed to Vercel. Live site:
 
-Suggested deployment steps:
+https://projecte2-budget-albert.vercel.app
+
+If you need to re-deploy or connect a new repository, use these settings:
 
 1. Connect the repository to Vercel.
 2. Set the build command to:
@@ -169,7 +259,37 @@ dist/budget-albert
 
 4. Deploy.
 
-> The app has not yet been deployed to Vercel, but these settings are the expected configuration.
+These settings were used to produce the currently published site above.
+
+### Vercel configuration file (example)
+
+You can add a `vercel.json` at the project root to pin the build/output settings. Example:
+
+```json
+{
+	"version": 2,
+	"builds": [
+		{
+			"src": "package.json",
+			"use": "@vercel/static-build",
+			"config": { "distDir": "dist/budget-albert" }
+		}
+	],
+	"routes": [
+		{ "src": "/(.*)", "dest": "/index.html" }
+	]
+}
+```
+
+### Deployment checklist (quick)
+
+1. Confirm repository is connected to Vercel and the correct branch is selected.
+2. Build command: `npm run build`.
+3. Output directory: `dist/budget-albert`.
+4. (Optional) Add `vercel.json` as shown above to enforce the static build output.
+5. Deploy and open the site at the published URL.
+
+![Vercel dashboard](docs/readme-assets/VERCEL-DASHBOARD.png)
 
 ---
 
@@ -185,4 +305,8 @@ dist/budget-albert
 
 Screenshots used for the README are stored in `docs/readme-assets/`.
 
-If you want, I can also add a short `vercel.json` section or a deployment checklist with screenshots.
+## License & Credits
+Developed by:
+- Albert Muntal Perez
+- Linkedin: https://www.linkedin.com/in/albert-muntal-perez-a626a0120/
+- GitHub: https://github.com/DrMunty
